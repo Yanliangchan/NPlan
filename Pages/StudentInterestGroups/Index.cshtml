@@ -1,0 +1,114 @@
+﻿@page
+@model NPlan.Pages.InterestGroups.IndexModel
+@{
+    ViewData["Title"] = "Interest Groups";
+}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - NPlan</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/accordion-faq-list.css">
+    <link rel="stylesheet" href="assets/css/Custom.css">
+    <link rel="stylesheet" href="assets/css/dropdown-search-bs4.css">
+    <link rel="stylesheet" href="assets/css/Table-With-Search-search-table.css">
+    <link rel="stylesheet" href="assets/css/Table-With-Search.css">
+    <style>
+        .table th, .table tr, .table td {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark border rounded border-dark">
+        <div class="container pt-4 pt-xl-5">
+            <div class="row pt-5">
+                <div class="col-md-8 col-xl-6 col-xxl-6 text-center text-md-start mx-auto" style="padding-right: 0px;padding-left: 0px;">
+                    <div class="text-center">
+                        <h1 class="fw-bold text-success mb-2" style="font-size: 24px;">Interest Groups&nbsp;</h1>
+                        <h3 class="fw-bold" style="padding-bottom: 0px;">Explore the various interest groups available for you</h3>
+                    </div>
+                    <section class="py-5 mt-5" style="margin-bottom: -50px;"></section>
+                </div>
+                <div class="col-12 col-lg-10 mx-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-12 col-xxl-11" style="padding-left: 0px;">
+                            <div class="card shadow">
+                                <div class="card-header d-flex flex-wrap justify-content-center align-items-center justify-content-sm-between gap-3">
+                                    <h5 class="display-6 text-nowrap text-capitalize mb-0 text-white">Interest Groups</h5>
+                                    <div class="input-group input-group-sm w-auto">
+                                        <input class="form-control form-control-sm" type="text" id="searchInput" placeholder="Search interest groups">
+                                        <button class="btn btn-outline-primary btn-sm" type="button" onclick="searchTable()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search mb-1">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive text-white">
+                                        <table class="table" id="interestGroupsTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Interest Group Name</th>
+                                                    <th>Description</th>
+                                                    <th>Type</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var interestGroup in Model.InterestGroup)
+                                                {
+                                                    <tr>
+                                                        <td>@interestGroup.Name</td>
+                                                        <td>@interestGroup.Description</td>
+                                                        <td>@interestGroup.InterestGroupType</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <nav>
+                                        <br />
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"></div>
+                        <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="py-5 mt-5"></section>
+    </header>
+
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("interestGroupsTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

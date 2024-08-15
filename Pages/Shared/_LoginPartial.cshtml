@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using NPlan.Data
+@using NPlan.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@ViewData["Title"] - NPlan</title>
+    <link rel="stylesheet" href="src/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="src/assets/css/accordion-faq-list.css">
+    <link rel="stylesheet" href="src/assets/css/Custom.css">
+    <link rel="stylesheet" href="src/assets/css/dropdown-search-bs4.css">
+    <link rel="stylesheet" href="src/assets/css/Table-With-Search-search-table.css">
+    <link rel="stylesheet" href="src/assets/css/Table-With-Search.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/NPlan.styles.css" asp-append-version="true" />
+</head>
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="btn btn-secondary shadow" role="button" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

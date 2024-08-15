@@ -1,0 +1,28 @@
+﻿@page
+@model NPlan.Pages.Attendance.IndexModel
+
+@{
+    ViewData["Title"] = "Attendance List";
+}
+
+<h2>Attendance List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Event</th>
+            <th>Attendance Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attendance in Model.AttendanceList)
+        {
+            <tr>
+                <td>@attendance.User.Fullname (@attendance.User.Email)</td>
+                <td>@attendance.Event.EventName</td>
+                <td>@attendance.AttendanceDate.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
